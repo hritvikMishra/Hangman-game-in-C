@@ -10,9 +10,9 @@
 #define MAX_ATTEMPTS 5
 
 int choose_category();
-char* Generate_random_word_from_category(char table[MAX_WORDS][MAX_WORDS_LENGTH]);
+char* Generate_random_word_from_category(char table[MAX_WORDS][MAX_WORDS_LENGTH]); // used to generate a random word from the whole given categories according to the one selected by the player
 void Initialize_randomly_selected_word (char selectedword[], char hiddenword[]);
-int Evaluate_guess(char playerguess, char selectedword[], char hiddenword[]);
+int Evaluate_guess(char playerguess, char selectedword[], char hiddenword[]);  // Guessing the players word
 
 void main () {
     int User_selected_category = -1;
@@ -55,7 +55,7 @@ void main () {
     }
     
     
-    //strcpy(random_selected_word, selected_category_words[random_word]);
+    //strcpy(random_selected_word, selected_category_words[random_word]);  // I used this one earlier but then, changed to avoid the loop values and could thereby change the future values with memcpy
     random_selected_word = Generate_random_word_from_category(selected_category_words);
     Initialize_randomly_selected_word(random_selected_word, Hiddenword);
 
@@ -69,7 +69,7 @@ void main () {
         getc(stdin);
         letter_guessed_by_player = toupper(letter_guessed_by_player);
         fflush(stdin);
-
+        //-----------------------------------------------------------------------
         if (Evaluate_guess(letter_guessed_by_player, random_selected_word, Hiddenword) == 0)
         {
             printf("\nNope!!! this isn't a part of the hidden word. Please try again! ");
@@ -79,11 +79,12 @@ void main () {
         {
             printf("\nWoohoo!!! You guessed the letter right! Keep on!\n");
         }
+        //------------------------------------------------------------------------
         
         // Output for notifying about the status of the game so far.....
         printf("You have %d ", MAX_ATTEMPTS - wrong_guesses_by_player);
         printf("attempts left!\n");
-
+        //-----------------------------------------------------------------------
         if (strcmp(random_selected_word, Hiddenword) == 0)
         {
             printf("Congratulations!!! You got the word right!!\n");
